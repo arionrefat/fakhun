@@ -2,7 +2,7 @@
   "name": "Fakhun",
   "version": "1.0.0",
   "scripts": {
-    "start": "bun src/index.ts"
+    "start": "bun run --hot ./src/index.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.6.0",
