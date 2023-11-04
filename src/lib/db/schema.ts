@@ -1,20 +1,23 @@
-import { integer, pgEnum, pgTable, serial, uniqueIndex, varchar } from 'drizzle-orm/pg-core';
- 
-// declaring enum in database
-export const popularityEnum = pgEnum('popularity', ['unknown', 'known', 'popular']);
- 
-export const countries = pgTable('countries', {
+import {
+  boolean,
+  pgEnum,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core';
+
+export const userRoles = pgEnum('roles', ['admin', 'user']);
+
+export const users = pgTable('users', {
   id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-}, (countries) => {
-  return {
-    nameIndex: uniqueIndex('name_idx').on(countries.name),
-  }
-});
- 
-export const cities = pgTable('cities', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-  countryId: integer('country_id').references(() => countries.id),
-  popularity: popularityEnum('popularity'),
+  firstName: text('first_name').notNull(),
+  lastName: text('last_name').notNull(),
+  email: text('email').notNull(),
+  password: text('password').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  profilePicture: text('profile_picture'),
+  isActive: boolean('is_active').default(true),
+  roles: userRoles('roles').default('user').notNull(),
 });
