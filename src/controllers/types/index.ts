@@ -8,7 +8,3 @@ export const insertUserSchema = createInsertSchema(users);
 export interface RegisterRequest extends Request {
   body: UserTypeInsert
 }
-
-export interface RegisterResponse extends Request {
-  body: UserTypeInsert
-}
