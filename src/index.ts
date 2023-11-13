@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 const app = express();
 const port = 8080;
 
-app.use(express.json()); // Add this line to enable JSON parsing in the request body
+app.use(express.json());
 
 //app.use('/tasks', taskRoutes); // Add this line to mount the Task API routes
 
