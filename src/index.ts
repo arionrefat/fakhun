@@ -1,14 +1,26 @@
-import express from 'express';
+import express, { NextFunction } from "express";
+import { Request, Response } from "express";
+
+import userRoutes from "./route/user.route";
 
 const app = express();
 const port = 8080;
 
 app.use(express.json());
 
-//app.use('/tasks', taskRoutes); // Add this line to mount the Task API routes
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
 
-app.get('/', (_, res) => {
-  res.send('Hello World!');
+const routes = [userRoutes];
+
+routes.forEach((route) => {
+  app.use(route);
+});
+
+app.get("/", (_, res) => {
+  res.send("Hello World!");
 });
 
 app.listen(port, () => {
