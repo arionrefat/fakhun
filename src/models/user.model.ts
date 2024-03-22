@@ -1,7 +1,7 @@
-import { db } from '../lib/db';
-import { users } from '@/src/lib/db/schema';
-import { eq } from 'drizzle-orm';
-import { UserTypeInsert } from '../models/types';
+import { db } from "../lib/db";
+import { users } from "@/src/lib/db/schema";
+import { eq } from "drizzle-orm";
+import { UserTypeInsert } from "../models/types";
 
 export async function createUser(data: UserTypeInsert) {
   return await db.insert(users).values(data).returning();

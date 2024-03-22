@@ -9,6 +9,7 @@ const UserController = {
       const newUser = await createUser(userData);
       res.status(201).json(newUser);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
